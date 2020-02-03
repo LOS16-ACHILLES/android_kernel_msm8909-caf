@@ -5628,11 +5628,14 @@
 				compatible = "focaltech,FT5x36";
 				reg = <0x38>;
 				interrupt-parent = <0x98>;
-				interrupts = <0xd 0x2008>;
+				interrupts = <0xd 0x2>;
 				vdd-supply = <0x90>;
 				vcc_i2c-supply = <0x91>;
-				focaltech,family-id = <0x4>;
-				focaltech,max_touch_point = <0x2>;
+				pinctrl-names = "pmx_ts_active", "pmx_ts_suspend";
+				pinctrl-0 = <0xda 0xdb>;
+				pinctrl-1 = <0xdc 0xdd>;
+				focaltech,family-id = <0x8>;
+				focaltech,max_touch_point = <0xa>;
 				focaltech,reset-gpio = <0x98 0xc 0x0>;
 				focaltech,irq-gpio = <0x98 0xd 0x0>;
 				focaltech,display-coords = <0x0 0x0 0x1e0 0x356>;
@@ -8456,6 +8459,17 @@
 			};
 		};
 
+		gen-vkeys {
+			compatible = "qcom,gen-vkeys";
+			label = "FT5x36";
+			qcom,disp-maxx = <0x1e0>;
+			qcom,disp-maxy = <0x356>;
+			qcom,panel-maxx = <0x1e0>;
+			qcom,panel-maxy = <0x3b2>;
+			qcom,key-codes = <0x8b 0xac 0x9e>;
+			qcom,y-offset = <0x0>;
+		};
+
 		gpio_keys {
 			compatible = "gpio-keys";
 			input-name = "gpio-keys";
@@ -8471,26 +8485,6 @@
 				gpio-key,wakeup;
 				debounce-interval = <0xf>;
 			};
-
-			vol_down {
-				label = "volume_down";
-				gpios = <0x98 0x5b 0x1>;
-				linux,input-type = <0x1>;
-				linux,code = <0x72>;
-				gpio-key,wakeup;
-				debounce-interval = <0xf>;
-			};
-		};
-
-		gen-vkeys {
-			compatible = "qcom,gen-vkeys";
-			label = "FT5x36";
-			qcom,disp-maxx = <0x1e0>;
-			qcom,disp-maxy = <0x356>;
-			qcom,panel-maxx = <0x1e0>;
-			qcom,panel-maxy = <0x3b2>;
-			qcom,key-codes = <0x8b 0xac 0x9e>;
-			qcom,y-offset = <0x0>;
 		};
 
 		sound {
